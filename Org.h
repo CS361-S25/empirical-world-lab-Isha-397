@@ -21,5 +21,15 @@ class Organism {
         std::cout << "Processing" << std::endl; //feel free to get rid of this
        
     }
+
+    emp::Ptr<Organism> CheckReproduction() {
+        if (points >= 1000) {
+            emp::Ptr<Organism> offspring = new Organism(*this);  
+            offspring->SetPoints(0.0);                            
+            points -= 1000;                                       
+            return offspring;
+        }
+        return nullptr;  
+    }
 };
 #endif
