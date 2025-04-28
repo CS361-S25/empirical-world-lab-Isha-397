@@ -7,34 +7,24 @@
 
 #include "World.h"
 
-// This is the main function for the NATIVE version of this project.
-
-int main(int argc, char* argv[])
-{
-  emp::Random random(2);
+int main() {
+  emp::Random random(5);
   OrgWorld world(random);
 
-  // Organism* new_org = new Organism(&random);
-  // world.Inject(*new_org);
+  world.Resize(10, 10);
 
-  // std::cout <<world.size();
-  Organism new_org(&random);
+  Organism* org1 = new Organism(&random, 0);
+  Organism* org2 = new Organism(&random, 1);
 
-  world.Inject(new_org);
+  world.Inject(*org1);
+  world.Inject(*org2);
 
+  std::cout << "Initial number of organisms: " << world.GetNumOrgs() << std::endl;
 
-  std::cout << "World size: " << world.size() << std::endl;
-
-  // Call Update 10 times
   for (int i = 0; i < 10; i++) {
-    std::cout << "Update #" << i + 1 << std::endl;
-    world.Update();
+      world.Update();
+      std::cout << "Update " << i << ", organisms: " << world.GetNumOrgs() << std::endl;
   }
 
-  world.Resize(10,10);
-
-  world.GetNumOrgs();
-
   return 0;
-
 }
